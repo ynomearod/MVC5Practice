@@ -23,7 +23,7 @@ namespace MVC5.Models
         
         public int ProductId { get; set; }
         [Required(ErrorMessageResourceType = typeof(Resources.Products), ErrorMessageResourceName = "ProductNameRequired")]
-        [StringLength(10)]  
+        //[StringLength(10)]  
         public string ProductName { get; set; }
         [Required]        
         public Nullable<decimal> Price { get; set; }
