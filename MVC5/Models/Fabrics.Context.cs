@@ -12,6 +12,8 @@ namespace MVC5.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class FabricsEntities : DbContext
     {
@@ -30,5 +32,15 @@ namespace MVC5.Models
         public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<OrderLine> OrderLine { get; set; }
         public virtual DbSet<Product> Product { get; set; }
+    
+        public virtual ObjectResult<Product> GetProducts()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Product>("GetProducts");
+        }
+    
+        public virtual ObjectResult<Product> GetProducts(MergeOption mergeOption)
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Product>("GetProducts", mergeOption);
+        }
     }
 }

@@ -113,6 +113,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="GetProducts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="FabricsModelStoreContainer">
           <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Occupation" EntityType="Self.Occupation" Schema="dbo" store:Type="Tables" />
@@ -278,7 +279,15 @@
             <End Role="Product" EntitySet="Product" />
             <End Role="OrderLine" EntitySet="OrderLine" />
           </AssociationSet>
+          <FunctionImport Name="GetProducts" EntitySet="Product" ReturnType="Collection(FabricsModel.Product)" />
         </EntityContainer>
+        <ComplexType Name="GetProducts_Result">
+          <Property Type="Int32" Name="ProductId" Nullable="false" />
+          <Property Type="String" Name="ProductName" Nullable="true" MaxLength="80" />
+          <Property Type="Decimal" Name="Price" Nullable="true" Precision="10" />
+          <Property Type="Boolean" Name="Active" Nullable="true" />
+          <Property Type="Decimal" Name="Stock" Nullable="true" Precision="18" Scale="3" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -349,6 +358,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetProducts" FunctionName="FabricsModel.Store.GetProducts">
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -217,6 +217,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Fabrics.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetProducts_Result.cs">
+      <DependentUpon>Fabrics.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LoginVM.cs" />
     <Compile Include="Models\ManageViewModels.cs" />

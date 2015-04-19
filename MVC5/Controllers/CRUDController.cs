@@ -13,9 +13,16 @@ namespace MVC5.Controllers
         FabricsEntities db = new FabricsEntities();
         
         // GET: CRUD
-        public ActionResult Index()
+        public ActionResult Index(string keywords, int limit = 10)
         {
-            var data = db.Product.Where(p => p.ProductName.StartsWith("C"));
+            //var data = db.Product.Where(p => p.ProductName.StartsWith(keywords)).Take(limit);
+
+            //var data = db.Database.SqlQuery<Product>("SELECT TOP " + limit + " * FROM dbo.Product WHERE ProductName like @p0", keywords + "%").AsQueryable();
+
+            var data = db.GetProducts();
+            
+            ViewBag.keywords = keywords;
+
             return View(data);
         }
 
