@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVC5.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -31,5 +32,17 @@ namespace MVC5.Controllers
         {
             return View();
         }
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(LoginVM data)
+        {
+            return View("LoginResult", data);
+        }
     }
+        
 }
