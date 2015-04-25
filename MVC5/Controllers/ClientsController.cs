@@ -12,12 +12,14 @@ namespace MVC5.Controllers
 {
     public class ClientsController : Controller
     {
-        private FabricsEntities db = new FabricsEntities();
+        //private FabricsEntities db = new FabricsEntities();
+        ClientRepository repos = RepositoryHelper.GetClientRepository();
 
         // GET: Clients
         public ActionResult Index()
         {
-            var client = db.Client.Include(c => c.Occupation).Take(10);
+            //var client = db.Client.Include(c => c.Occupation).Take(10);
+            var client = repos.All();
             return View(client.ToList());
         }
 
@@ -28,7 +30,7 @@ namespace MVC5.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Client client = db.Client.Find(id);
+            Client client = repos.Find(id.Value);
             if (client == null)
             {
                 return HttpNotFound();
@@ -36,10 +38,12 @@ namespace MVC5.Controllers
             return View(client);
         }
 
+        ClientRepository reposOccupation = RepositoryHelper.GetClientRepository();
+
         // GET: Clients/Create
         public ActionResult Create()
         {
-            ViewBag.OccupationId = new SelectList(db.Occupation, "OccupationId", "OccupationName");
+            ViewBag.OccupationId = new SelectList(reposOccupation.All(), "OccupationId", "OccupationName");
             return View();
         }
 
@@ -52,12 +56,12 @@ namespace MVC5.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Client.Add(client);
-                db.SaveChanges();
+                repos.Add(client);
+                repos.UnitOfWork.Commit();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.OccupationId = new SelectList(db.Occupation, "OccupationId", "OccupationName", client.OccupationId);
+            ViewBag.OccupationId = new SelectList(reposOccupation.All(), "OccupationId", "OccupationName", client.OccupationId);
             return View(client);
         }
 
@@ -68,12 +72,12 @@ namespace MVC5.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Client client = db.Client.Find(id);
+            Client client = repos.Find(id.Value);
             if (client == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.OccupationId = new SelectList(db.Occupation, "OccupationId", "OccupationName", client.OccupationId);
+            ViewBag.OccupationId = new SelectList(reposOccupation.All(), "OccupationId", "OccupationName", client.OccupationId);
             return View(client);
         }
 
@@ -86,11 +90,11 @@ namespace MVC5.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(client).State = EntityState.Modified;
-                db.SaveChanges();
+                repos.UnitOfWork.Context.Entry(client).State = EntityState.Modified;
+                repos.UnitOfWork.Commit();
                 return RedirectToAction("Index");
             }
-            ViewBag.OccupationId = new SelectList(db.Occupation, "OccupationId", "OccupationName", client.OccupationId);
+            ViewBag.OccupationId = new SelectList(reposOccupation.All(), "OccupationId", "OccupationName", client.OccupationId);
             return View(client);
         }
 
@@ -101,7 +105,7 @@ namespace MVC5.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Client client = db.Client.Find(id);
+            Client client = repos.Find(id.Value);
             if (client == null)
             {
                 return HttpNotFound();
@@ -114,9 +118,9 @@ namespace MVC5.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Client client = db.Client.Find(id);
-            db.Client.Remove(client);
-            db.SaveChanges();
+            Client client = repos.Find(id);
+            repos.Delete(client);
+            repos.UnitOfWork.Commit();
             return RedirectToAction("Index");
         }
 
@@ -124,7 +128,7 @@ namespace MVC5.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                repos.UnitOfWork.Context.Dispose();
             }
             base.Dispose(disposing);
         }
