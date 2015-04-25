@@ -18,11 +18,12 @@ namespace MVC5.Models
         {
             this.Order = new HashSet<Order>();
         }
-    
+        
         public int ClientId { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
+        [MyValidation]
         public string Gender { get; set; }
         public Nullable<System.DateTime> DateOfBirth { get; set; }
         public Nullable<double> CreditRating { get; set; }
