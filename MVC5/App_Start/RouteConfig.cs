@@ -14,8 +14,14 @@ namespace MVC5
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "CustSet",
+                url: "FaceBook/{controller}-{action}/{id}",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 name: "Default",
-                url: "Docs/{controller}-{action}/{id}",
+                url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
         }
