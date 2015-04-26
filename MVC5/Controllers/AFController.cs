@@ -13,9 +13,13 @@ namespace MVC5.Controllers
         {
             return View();
         }
-
-        public ActionResult ShowMeError()
+        [HandleError(Master = "", ExceptionType = typeof(ArgumentException), View = ("Error.A"))]
+        public ActionResult ShowMeError(string type)
         {
+            if (type == "1")
+            {
+                throw new ArgumentException("XXX");
+            }
             throw new Exception("error");
             return View();
         }
