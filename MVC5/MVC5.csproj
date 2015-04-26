@@ -298,6 +298,7 @@
     <Compile Include="Models\RepositoryIQueryableExtensions.cs">
       <DependentUpon>IRepository.EF6.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SimpleViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -411,6 +412,8 @@
     <Content Include="Views\Shared\alertView.cshtml" />
     <Content Include="Views\MB\Index.cshtml" />
     <Content Include="Views\MB\tempData2.cshtml" />
+    <Content Include="Views\MB\simple1.cshtml" />
+    <Content Include="Views\MB\Complex2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
