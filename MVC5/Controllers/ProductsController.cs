@@ -78,11 +78,13 @@ namespace MVC5.Controllers
         // 詳細資訊，請參閱 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductId,ProductName,Price,Active,Stock")] Product product)
+        public ActionResult Edit(int id, FormCollection form)
         {
-            if (ModelState.IsValid)
+            var product = db.Product.Find(id);
+
+            if (TryUpdateModel<Product>(product, new string[] {"ProductName", "Price", "Stock"}))
             {
-                db.Entry(product).State = EntityState.Modified;
+                //db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
