@@ -5,3 +5,19 @@
 
 <h2>View1</h2>
 
+<button onclick="getData()">get json data</button><br />
+
+<select id="test"></select>
+
+<script>
+    function getData() {
+        $.getJSON("/AR/Json1", null, function (data) {
+            $.each(data, function (i, d) {
+                $('#test').append($('<option>', {
+                    value: d.ProductId,
+                    text: d.ProductName
+                }));
+            });
+        });
+    }
+</script>

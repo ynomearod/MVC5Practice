@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace MVC5.Controllers
 {
-    public class ARController : Controller
+    public class ARController : BaseController
     {
         // GET: AR
         public ActionResult Index()
@@ -17,7 +17,7 @@ namespace MVC5.Controllers
 
         public ActionResult View1()
         {
-            return View("View2");
+            return View("View1");
         }
 
         public ActionResult View2()
@@ -52,6 +52,13 @@ namespace MVC5.Controllers
         {
              byte[] content = System.IO.File.ReadAllBytes(Server.MapPath("~/Content/banner3_large.jpg"));
             return File(content, "image/jpeg", "LINQ");
+        }
+
+        public ActionResult Json1()
+        {
+            db.Configuration.LazyLoadingEnabled = false;
+            var data = db.Product.Take(10);
+            return Json(data,JsonRequestBehavior.AllowGet);
         }
     }
 }
