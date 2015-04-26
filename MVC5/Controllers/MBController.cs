@@ -75,5 +75,38 @@ namespace MVC5.Controllers
         {
             return Content("item1:" + item1.UserName + item1.Password);
         }
+
+        public ActionResult Complex3()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Complex3(
+            [Bind(Prefix="item1")]
+            SimpleViewModel item)
+        {
+            return Content("Complex3:" + item.UserName + item.Password);
+        }
+
+        public ActionResult Complex4()
+        {
+            var data = from p in db.Client
+                       select new SimpleViewModel()
+                       {
+                           UserName = p.FirstName,
+                           Password = p.LastName,
+                           age = 18
+                       };
+            return View(data.Take(10));
+        }
+
+        [HttpPost]
+        public ActionResult Complex4(IList<SimpleViewModel> item)
+        {
+            return Content("");
+        }
+
+
     }
 }
