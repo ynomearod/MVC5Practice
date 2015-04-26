@@ -16,6 +16,7 @@ namespace MVC5.Controllers
         //ClientRepository repos = RepositoryHelper.GetClientRepository();
 
         // GET: Clients
+        
         public ActionResult Index()
         {
             //var client = db.Client.Include(c => c.Occupation).Take(10);
@@ -23,6 +24,7 @@ namespace MVC5.Controllers
             return View(client.ToList());
         }
 
+        
         // GET: Clients/Details/5
         public ActionResult Details(int? id)
         {
