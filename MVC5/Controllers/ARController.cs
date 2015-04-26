@@ -60,5 +60,17 @@ namespace MVC5.Controllers
             var data = db.Product.Take(10);
             return Json(data,JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult redirect1()
+        {
+            //return Redirect("/AR/Json1");
+            //return RedirectToAction("file3", new { url = "https://t.kfs.io/upload_images/31696/miniASP_final_LOGO_cs4-02_promote.jpg" });
+            return RedirectToActionPermanent("file3", new { url = "https://t.kfs.io/upload_images/31696/miniASP_final_LOGO_cs4-02_promote.jpg" });            
+        }
+
+        public ActionResult httpstatus()
+        {
+            return HttpNotFound();
+        }
     }
 }
