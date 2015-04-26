@@ -106,7 +106,21 @@ namespace MVC5.Controllers
         {
             return Content("");
         }
+        public ActionResult Complex5()
+        {
+            return View();
+        }
 
+        [HttpPost]
+        public ActionResult Complex5(FormCollection form)
+        {
+            var item = new SimpleViewModel();
 
+            if (TryUpdateModel<SimpleViewModel>(item))
+            {
+                return Redirect("Complex5");
+            }
+            return View(item);
+        }
     }
 }
