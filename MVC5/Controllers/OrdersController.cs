@@ -15,10 +15,16 @@ namespace MVC5.Controllers
         private FabricsEntities db = new FabricsEntities();
 
         // GET: Orders
-        public ActionResult Index()
+        public ActionResult Index(int clientId = 0)
         {
             var order = db.Order.Include(o => o.Client);
-            return View(order.ToList());
+  
+            if ( clientId > 0 )
+            {
+                order = order.Where(p => p.ClientId == clientId);
+            }
+
+            return PartialView(order.ToList());
         }
 
         // GET: Orders/Details/5

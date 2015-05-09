@@ -39,6 +39,9 @@ namespace MVC5.Controllers
             {
                 return HttpNotFound();
             }
+
+            //ViewBag.OrderList = client.Order.ToList();
+
             return View(client);
         }
 
