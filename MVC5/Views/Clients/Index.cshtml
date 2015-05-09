@@ -8,6 +8,8 @@
 
 <p>
     @Html.ActionLink("Create New", "Create")
+
+    @Html.DropDownList("SelectGender", ViewBag.SelectList as SelectList, "--請選擇--", new { onchange = "location.search = '?gender=' + $('#SelectGender').val();" })
 </p>
 <table class="table">
     <tr>

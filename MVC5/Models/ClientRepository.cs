@@ -15,6 +15,11 @@ namespace MVC5.Models
         {
             return this.All().FirstOrDefault(p => p.OccupationId == id);
         }
+
+        internal IQueryable<Client> SeachGender(string gender)
+        {
+            return this.All().Where(p => p.Gender == gender).Take(10);
+        }
 	}
 
 	public  interface IClientRepository : IRepository<Client>
