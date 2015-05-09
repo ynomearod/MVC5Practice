@@ -7,9 +7,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MVC5.Models;
+using MVC5.App_ActionFilter;
 
 namespace MVC5.Controllers
 {
+    [Logger]
     public class ClientsController : BaseController
     {
         //private FabricsEntities db = new FabricsEntities();

@@ -1,4 +1,5 @@
-﻿using MVC5.Models;
+﻿using MVC5.App_ActionFilter;
+using MVC5.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,10 +15,9 @@ namespace MVC5.Controllers
             return View();
         }
 
+        [ViewBagFilter] 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
