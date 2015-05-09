@@ -19,20 +19,18 @@ namespace MVC5.Controllers
 
         // GET: Clients
         
-        public ActionResult Index(string gender="M")
+        public ActionResult Index(string city)
         {
             //var client = db.Client.Include(c => c.Occupation).Take(10);
             //var client = reposClient.All();
-            var client = reposClient.SeachGender(gender);
-
+            //var client = reposClient.SeachGender(gender);
+            var client = reposClient.SeachCity(city);
+            
             ViewData.Model = client.ToList();
 
-            var genderList = new List<SelectListItem>();
+            var cityList = reposClient.All().Select(p => new { p.City }).Distinct().ToList();
 
-            genderList.Add(new SelectListItem() { Value = "M", Text = "男生" });
-            genderList.Add(new SelectListItem() { Value = "F", Text = "女生" });
-
-            ViewBag.SelectList = new SelectList(genderList, "Value", "Text", gender);
+            ViewBag.Cities = new SelectList(cityList, "city", "city", city);
 
             return View(client.ToList());
         }

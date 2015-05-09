@@ -9,7 +9,7 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 
-    @Html.DropDownList("SelectGender", ViewBag.SelectList as SelectList, "--請選擇--", new { onchange = "location.search = '?gender=' + $('#SelectGender').val();" })
+    @Html.DropDownList("Cities1", ViewBag.Cities as SelectList, "--請選擇--", new { onchange = "location.search = '?city=' + $('#Cities1').val();" })
 </p>
 <table class="table">
     <tr>
