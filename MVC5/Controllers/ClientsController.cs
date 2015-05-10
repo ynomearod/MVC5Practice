@@ -27,7 +27,7 @@ namespace MVC5.Controllers
             //var client = reposClient.SeachGender(gender);
             var client = reposClient.SeachCity(city);
 
-            ViewData.Model = client.ToPagedList(1, 10);
+            ViewData.Model = client.ToPagedList(pageNo, 10);
 
             var cityList = reposClient.All().Select(p => new { p.City }).Distinct().ToList();
 

@@ -80,7 +80,7 @@ namespace <#= Namespace #>
 <# if (UseAsync) { #>
         public async Task<ActionResult> Index()
 <# } else { #>
-        public ActionResult Index(int pageNo = 1)
+        public ActionResult Index(string city, int pageNo = 1)
 <# } #>
         {
 <#  var includeExpressions = "";
@@ -91,12 +91,18 @@ namespace <#= Namespace #>
 <#		if (UseAsync) { #>
             return View(await <#= entitySetVar #>.ToListAsync());
 <#		} else { #>
+			 var client = reposClient.SeachCity(city);
+			 var cityList = reposClient.All().Select(p => new { p.City }).Distinct().ToList();
+			 ViewBag.Cities = new SelectList(cityList, "city", "city", city);
             return View(<#= entitySetVar #>.ToPagedList(pageNo, 10));
 <#		} #>
 <# } else { #>
 <#		if (UseAsync) { #>
             return View(await db.<#= entitySetName #><#= includeExpressions #>.ToListAsync());
 <#		} else { #>
+			var client = reposClient.SeachCity(city);
+			var cityList = reposClient.All().Select(p => new { p.City }).Distinct().ToList();
+			ViewBag.Cities = new SelectList(cityList, "city", "city", city);
             return View(db.<#= entitySetName #><#= includeExpressions #>.ToPagedList(pageNo, 10));
 <#		} #>
 <# } #>

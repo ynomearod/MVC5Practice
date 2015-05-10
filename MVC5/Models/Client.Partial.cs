@@ -50,6 +50,7 @@ namespace MVC5.Models
         public string ZipCode { get; set; }
         public Nullable<double> Longitude { get; set; }
         public Nullable<double> Latitude { get; set; }
+        [ScaffoldColumn(false)]
         public string Notes { get; set; }
         [Required]
         public bool IsDelete { get; set; }
