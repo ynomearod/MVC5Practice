@@ -14,7 +14,7 @@
 
     <h4>Client's Order</h4>
     @Html.Action("Index", "Orders", new { clientId = Model.ClientId })
-    @Html.Partial("List", Model.Order.ToList())
+    @*@Html.Partial("List", Model.Order.ToList())*@
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ClientId })
