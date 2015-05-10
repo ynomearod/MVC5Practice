@@ -33,7 +33,7 @@ namespace MVC5.Controllers
 
             ViewBag.Cities = new SelectList(cityList, "city", "city", city);
 
-            return View(client.ToList());
+            return View();
         }
 
         
