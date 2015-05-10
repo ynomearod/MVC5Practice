@@ -7,6 +7,24 @@
 
 @Ajax.ActionLink("取得目前時間", "GetTime", new AjaxOptions { UpdateTargetId = "now" })
 
-
 <div id="now"></div>
+
+<hr />
+
+@Ajax.ActionLink("取得json", "GetJson", 
+new AjaxOptions { 
+    HttpMethod = "Post",
+    OnSuccess = "GetResult"
+})
+
+<script>
+    function GetResult(data) {
+        if (data.result)
+            $("#loading").show();
+    }
+</script>
+
+<div id="loading" style="display:none">
+    <img src="http://www.ajaxload.info/cache/FF/FF/FF/00/00/00/39-0.gif" alt="loading" />
+</div>
 

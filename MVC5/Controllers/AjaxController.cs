@@ -18,5 +18,10 @@ namespace MVC5.Controllers
         {
             return DateTime.Now.ToString();
         }
+
+        public ActionResult GetJson()
+        {
+            return Json(new { result = "OK"});
+        }
     }
 }

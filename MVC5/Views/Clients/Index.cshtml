@@ -1,4 +1,6 @@
 ﻿@model IEnumerable<Client>
+@using PagedList
+@using PagedList.Mvc
 
 @{
     ViewBag.Title = "Index";
@@ -49,15 +51,26 @@
             @Html.DisplayFor(modelItem => item.DateOfBirth)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ClientId }) |
+            @Html.ActionLink("Edit", "Edit", new { id = item.ClientId }) |
             @*@Html.ActionLink("Details", "Details", new { id=item.ClientId })*@
-            @Ajax.ActionLink("Details", "Details", "Clients", new { id = item.ClientId }, new AjaxOptions { UpdateTargetId = "Detail" }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ClientId })
+            @Ajax.ActionLink("Details", "Details", "Clients", new { id = item.ClientId },
+            new AjaxOptions{
+                    UpdateTargetId = "Detail",
+                    Confirm = "確定要看?"
+            }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ClientId })
         </td>
+
     </tr>
 }
   
 </table>
+
+@{
+    var data = Model as IPagedList<Client>;
+}
+
+@*@Html.PagedListPager(data, (p) => Url.Action("Index", new{ pageNo = p }))*@
 
 <h4>Client's Order</h4>
 

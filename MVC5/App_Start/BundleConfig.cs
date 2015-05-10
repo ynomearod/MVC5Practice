@@ -8,15 +8,18 @@ namespace MVC5
         // 如需「搭配」的詳細資訊，請瀏覽 http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+            //bundles.IgnoreList.Clear();
+
+            //bundles.IgnoreList.Ignore("*.intellisense.js");
+            //bundles.IgnoreList.Ignore("*-vsdoc.js");
+            //bundles.IgnoreList.Ignore("*.debug.js", OptimizationMode.WhenEnabled);
+
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/jquery.unobtrusive-ajax.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
-
-            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                       "~/Scripts/jquery-1.11.2.min.js",
-                       "~/Scripts/jquery.unobtrusive-ajax.js"));
 
             // 使用開發版本的 Modernizr 進行開發並學習。然後，當您
             // 準備好實際執行時，請使用 http://modernizr.com 上的建置工具，只選擇您需要的測試。

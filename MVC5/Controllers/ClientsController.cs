@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using MVC5.Models;
 using MVC5.App_ActionFilter;
+using PagedList;
 
 namespace MVC5.Controllers
 {
@@ -18,15 +19,15 @@ namespace MVC5.Controllers
         //ClientRepository repos = RepositoryHelper.GetClientRepository();
 
         // GET: Clients
-        
-        public ActionResult Index(string city)
+
+        public ActionResult Index(string city, int pageNo = 1)
         {
             //var client = db.Client.Include(c => c.Occupation).Take(10);
             //var client = reposClient.All();
             //var client = reposClient.SeachGender(gender);
             var client = reposClient.SeachCity(city);
-            
-            ViewData.Model = client.ToList();
+
+            ViewData.Model = client.ToPagedList(1, 10);
 
             var cityList = reposClient.All().Select(p => new { p.City }).Distinct().ToList();
 
